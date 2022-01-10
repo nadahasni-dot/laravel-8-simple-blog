@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -13,6 +14,7 @@ class PostController extends Controller
         return view('blog', [
             "title" => "Blog",
             "posts" => Post::all(),
+            "categories" => Category::all(),
         ]);
     }
 
