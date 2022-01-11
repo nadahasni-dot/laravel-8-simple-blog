@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <h5 class="card-title mb-3"><a class="text-decoration-none"
                                 href="/post/{{ $post->slug }}">{{ $post->title }}</a></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">By: <a href="#"
+                        <h6 class="card-subtitle mb-2 text-muted">By: <a href="/author/{{ $post->user->username }}"
                                 class="text-decoration-none">{{ $post->user->name }}</a> in
                             <a class="text-decoration-none"
                                 href="/category/{{ $post->category->slug }}">{{ $post->category->name }}</a>
