@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use function PHPSTORM_META\map;
+
 class PostFactory extends Factory
 {
     /**
@@ -19,7 +21,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(mt_rand(2, 8)),
             'slug' => $this->faker->slug(),
             'excerpt' => $this->faker->paragraph(),
-            'body' => $this->faker->paragraph(mt_rand(10, 100)),
+            'body' => collect($this->faker->paragraphs(mt_rand(10, 100)))->map(fn ($p) => "<p>$p</p>")->implode(''),
         ];
     }
 }

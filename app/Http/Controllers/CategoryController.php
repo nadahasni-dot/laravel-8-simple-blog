@@ -52,6 +52,7 @@ class CategoryController extends Controller
     {
         return view('blog', [
             "title" => "Post By Category : $category->name",
+            "active" => "blog",
             "posts" => $category->posts->load('category', 'user'),
             "categories" => $category::all(),
         ]);
