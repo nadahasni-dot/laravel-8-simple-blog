@@ -1,11 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Blog Page</h1>
+    <h1>{{ $title }}</h1>
 
     <div class="mt-5">
         <div class="row">
-            <div class="col-8">
+            <div class="col-md-8">
                 @foreach ($posts as $post)
                     <article class="mb-3">
                         <div class="card">
@@ -24,7 +24,7 @@
                     </article>
                 @endforeach
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Categories</h5>

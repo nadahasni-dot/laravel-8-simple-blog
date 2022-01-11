@@ -32,13 +32,12 @@ Route::get('/about', function () {
 Route::get('/blog', [PostController::class, 'index']);
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
 
-Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/category/{category:slug}', [CategoryController::class, 'show']);
 
-Route::get('/author/{author:username}', function (User $author) {    
+Route::get('/author/{author:username}', function (User $author) {
     return view('blog', [
-        "title" => "Blog",
-        "posts" => $author->posts()->get(),
+        "title" => "Post By : $author->name",
+        "posts" => $author->posts->load('category', 'user'),
         "categories" => Category::all(),
     ]);
 });
