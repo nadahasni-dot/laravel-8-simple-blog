@@ -44,3 +44,11 @@ Route::get('/author/{author:username}', function (User $author) {
         "categories" => Category::all(),
     ]);
 });
+
+// AUTH ROUTE
+Route::get('/login', function () {
+    return view('login', [
+        "title" => "Login",
+        "active" => "login",
+    ]);
+});
