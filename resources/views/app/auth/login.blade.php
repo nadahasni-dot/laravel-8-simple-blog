@@ -5,6 +5,12 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <form>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -14,7 +20,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                        required>
                 </div>
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
