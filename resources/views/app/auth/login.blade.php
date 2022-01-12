@@ -11,17 +11,36 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <form>
+
+            @if (session()->has('login_error'))
+                <div class="alert alert-success alert-danger fade show" role="alert">
+                    {{ session('login_error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            <form action="/login" method="POST">
+                @csrf
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Email" required>
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Email" name="email" value="{{ old('email') }}" autofocus
+                        required>
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-                        required>
+                    <input type="password" class="form-control @error('email') is-invalid @enderror"
+                        id="exampleInputPassword1" placeholder="Password" name="password" required>
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
