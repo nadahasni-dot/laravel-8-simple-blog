@@ -5,9 +5,9 @@
         <div class="col-md-8">
             <article class="mb-5">
                 <h1 class="mb-3">{{ $post->title }}</h1>
-                <h6 class="mb-3">By: <a href="/author/{{ $post->user->username }}"
+                <h6 class="mb-3">By: <a href="/blog?author={{ $post->user->username }}"
                         class="text-decoration-none">{{ $post->user->name }}</a> in <a class="text-decoration-none"
-                        href="/category/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+                        href="/blog?category={{ $post->category->slug }}">{{ $post->category->name }}</a>
                 </h6>
                 <img src="https://source.unsplash.com/800x400?{{ $post->category->name }}" class="mb-3 img-fluid"
                     alt="{{ $post->category->name }}">
@@ -21,7 +21,7 @@
                     <h5 class="card-title mb-3">Categories</h5>
                     <div class="list-group">
                         @foreach ($categories as $category)
-                            <a href="/category/{{ $category->slug }}" class="list-group-item list-group-item-action"
+                            <a href="/blog?category={{ $category->slug }}" class="list-group-item list-group-item-action"
                                 aria-current="true">
                                 {{ $category->name }}
                             </a>
