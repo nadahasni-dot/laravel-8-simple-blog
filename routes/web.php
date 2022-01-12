@@ -5,6 +5,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +48,5 @@ Route::get('/author/{author:username}', function (User $author) {
 });
 
 // AUTH ROUTE
-Route::get('/login', function () {
-    return view('login', [
-        "title" => "Login",
-        "active" => "login",
-    ]);
-});
+Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index']);
