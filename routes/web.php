@@ -5,6 +5,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 
@@ -57,8 +58,10 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 // APP ROUTE
 Route::get('/dashboard', function () {
-    return view('home', [
+    return view('app.dashboard.index', [
         "title" => "Dashboard",
         "active" => "dashboard",
     ]);
 })->middleware(['auth']);
+
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');

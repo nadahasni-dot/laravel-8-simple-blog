@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {{ $active === 'home' ? 'active' : '' }}" aria-current="page" href="/">Home</a>
+                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $active === 'about' ? 'active' : '' }}" href="/about">About</a>
+                    <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ $active === 'blog' ? 'active' : '' }}" href="/blog">Blog</a>
+                    <a class="nav-link {{ Request::is('blog') ? 'active' : '' }}" href="/blog">Blog</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
