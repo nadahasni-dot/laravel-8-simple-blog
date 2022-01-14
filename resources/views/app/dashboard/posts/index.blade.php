@@ -32,8 +32,15 @@
                             <td>
                                 <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-primary btn-sm"><span
                                         data-feather="eye"></span></a>
-                                <a href="#" class="badge bg-success btn-sm"><span data-feather="edit"></span></a>
-                                <a href="#" class="badge bg-danger btn-sm"><span data-feather="delete"></span></a>
+                                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-success btn-sm"><span
+                                        data-feather="edit"></span></a>
+                                <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="badge bg-danger btn-sm border-0"
+                                        onclick="return confirm('Are you sure?')"><span
+                                            data-feather="delete"></span></button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
