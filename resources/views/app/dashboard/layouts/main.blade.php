@@ -15,6 +15,13 @@
     {{-- Bpotstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+
+    {{-- trix editor --}}
+    <link rel="stylesheet" type="text/css" href="/css/trix.css">
+    <script type="text/javascript" src="/js/trix.js"></script>
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -30,11 +37,11 @@
             }
         }
 
+        trix-toolbar [data-trix-button-group="file-tools"] {
+            display: none;
+        }
+
     </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="/css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
