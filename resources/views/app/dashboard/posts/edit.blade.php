@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-md-8">
-        <form method="POST" action="/dashboard/posts/{{ $post->slug }}">
+        <form method="POST" action="/dashboard/posts/{{ $post->slug }}" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-3">
@@ -45,6 +45,22 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="image" class="form-label @error('image') is-invalid @enderror">Post Image</label>
+                <input type="hidden" name="old_image" value="{{ $post->image }}">
+                @if ($post->image)
+                    <img class="img-fluid mb-3" style="max-width: 200px; object-fit:cover; display:block" id="img-preview"
+                        src="{{ asset('storage/' . $post->image) }}">
+                @else
+                    <img class="img-fluid mb-3" style="max-width: 200px; object-fit:cover" id="img-preview">
+                @endif
+                <input class="form-control" type="file" id="image" name="image" onchange="previewImage()">
+                @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
                 @error('body')
                     <p class="text-danger"><small>{{ $message }}</small></p>
@@ -69,5 +85,18 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         });
+
+        function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('#img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+            oFReader.onload = function(oFREvent) {
+                imgPreview.src = oFREvent.target.result;
+            }
+        }
     </script>
 @endsection
