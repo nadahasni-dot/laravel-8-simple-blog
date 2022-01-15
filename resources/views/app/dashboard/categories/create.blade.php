@@ -2,17 +2,17 @@
 
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Create New Post</h1>
+        <h1 class="h2">Create New Category</h1>
     </div>
 
     <div class="col-md-8">
-        <form method="POST" action="/dashboard/posts" enctype="multipart/form-data">
+        <form method="POST" action="/dashboard/categories">
             @csrf
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                    value="{{ old('title') }}" required autofocus>
-                @error('title')
+                <label for="name" class="form-label">Category Name</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                    value="{{ old('name') }}" required autofocus>
+                @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -28,68 +28,18 @@
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <select id="category" class="form-select @error('category_id') is-invalid @enderror"
-                    aria-label="Default select example" name="category_id" required>
-                    <option value="" selected>Select category</option>
-                    @foreach ($categories as $category)
-                        <option @if (old('category_id') == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-                @error('category_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="image" class="form-label @error('image') is-invalid @enderror">Post Image</label>
-                <img class="img-fluid mb-3" style="max-width: 200px; object-fit:cover" id="img-preview">
-                <input class="form-control" type="file" id="image" name="image" onchange="previewImage()">
-                @error('image')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="body" class="form-label">Body</label>
-                @error('body')
-                    <p class="text-danger"><small>{{ $message }}</small></p>
-                @enderror
-                <input id="body" value="{{ old('body') }}" type="hidden" name="body">
-                <trix-editor input="body"></trix-editor>
-            </div>
-            <button type="submit" class="btn btn-primary mb-5">Create Post</button>
+            <button type="submit" class="btn btn-primary mb-5">Create Category</button>
         </form>
     </div>
 
     <script>
-        const title = document.querySelector('#title');
+        const name = document.querySelector('#name');
         const slug = document.querySelector('#slug');
 
-        title.addEventListener('change', function() {
-            fetch('/dashboard/posts/checkSlug?title=' + title.value)
+        name.addEventListener('change', function() {
+            fetch('/dashboard/categories/checkSlug?name=' + name.value)
                 .then(response => response.json())
                 .then(data => slug.value = data.slug);
         });
-
-        document.addEventListener('trix-file-accept', function(e) {
-            e.preventDefault();
-        });
-
-        function previewImage() {
-            const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('#img-preview');
-
-            imgPreview.style.display = 'block';
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
-            }
-        }
     </script>
 @endsection
