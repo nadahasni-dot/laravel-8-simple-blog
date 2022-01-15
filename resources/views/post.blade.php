@@ -9,8 +9,14 @@
                         class="text-decoration-none">{{ $post->user->name }}</a> in <a class="text-decoration-none"
                         href="/blog?category={{ $post->category->slug }}">{{ $post->category->name }}</a>
                 </h6>
-                <img src="https://source.unsplash.com/800x400?{{ $post->category->name }}" class="mb-3 img-fluid"
-                    alt="{{ $post->category->name }}">
+                @if ($post->image)
+                    <img src="{{ asset('storage/' . $post->image) }}" class="mb-3 img-fluid"
+                        alt="{{ $post->category->name }}">
+                @else
+                    <img src="https://source.unsplash.com/800x400?{{ $post->category->name }}" class="mb-3 img-fluid"
+                        alt="{{ $post->category->name }}">
+                @endif
+
                 {!! $post->body !!}
                 <p class="mt-3"><a href="/blog" class="card-link btn btn-primary">Back</a></p>
             </article>

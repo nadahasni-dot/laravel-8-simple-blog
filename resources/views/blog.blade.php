@@ -26,8 +26,13 @@
             <div class="card mb-3">
                 <div class="position-absolute m-3"><a class="btn btn-primary btn-sm"
                         href="/blog?category={{ $posts[0]->category->slug }}">{{ $posts[0]->category->name }}</a></div>
-                <img src="https://source.unsplash.com/800x200?{{ $posts[0]->category->name }}" class="card-img-top"
-                    alt="{{ $posts[0]->title }}">
+                @if ($posts[0]->image)
+                    <img src="{{ asset('storage/' . $posts[0]->image) }}" class="card-img-top"
+                        alt="{{ $posts[0]->title }}">
+                @else
+                    <img src="https://source.unsplash.com/800x200?{{ $posts[0]->category->name }}" class="card-img-top"
+                        alt="{{ $posts[0]->title }}">
+                @endif
                 <div class="card-body">
                     <h5 class="card-title">{{ $posts[0]->title }}</h5>
                     <p class="card-text">{{ $posts[0]->excerpt }}</p>
@@ -50,8 +55,14 @@
                             <div class="position-absolute m-3"><a class="btn btn-primary btn-sm"
                                     href="/blog?category={{ $post->category->slug }}">{{ $post->category->name }}</a>
                             </div>
-                            <img src="https://source.unsplash.com/800x200?{{ $post->category->name }}"
-                                class="card-img-top" alt="{{ $post->category->name }}">
+                            @if ($post->image)
+                                <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top"
+                                    alt="{{ $post->category->name }}">
+                            @else
+                                <img src="https://source.unsplash.com/800x200?{{ $post->category->name }}"
+                                    class="card-img-top" alt="{{ $post->category->name }}">
+                            @endif
+
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post->title }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">By: <a
